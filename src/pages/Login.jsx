@@ -1,0 +1,74 @@
+import { useContext, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { useForm } from '../hooks/useForm';
+import '../css/Auth.css';           // Estilos compartidos con Register
+
+const Login = () => {
+    // Extraemos la función login del contexto
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [error, setError] = useState('');
+
+    // Usamos el hook personalizado para el email y password
+    const { email, password, onInputChange } = useForm({
+        email: '',
+        password: ''
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        // Intentamos loguear con los datos del formulario
+        const success = login(email, password);
+
+        if (success) {
+            // Si es correcto, se navega al Dashboard (Panel Principal)
+            navigate('/dashboard');
+        } else {
+            // Si falla, se muestra un mensaje de error
+            setError('Correo o contraseña incorrectos');
+        }
+    };
+
+    return (
+        <div className="auth-container">
+            <h2>Iniciar Sesión</h2>
+            <form onSubmit={handleSubmit} className="auth-form">
+                {error && <p className="error-msg">{error}</p>}
+
+                <div className="form-group">
+                    <label>Correo Electrónico:</label>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        value={email} 
+                        onChange={onInputChange} 
+                        placeholder="ejemplo@correo.com"
+                        required 
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>Contraseña:</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        value={password} 
+                        onChange={onInputChange} 
+                        placeholder="********"
+                        required 
+                    />
+                </div>
+
+                <button type="submit" className="btn-primary">Ingresar</button>
+            </form>
+            
+            <p className="auth-footer">
+                ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+            </p>
+        </div>
+    );
+};
+
+export default Login;
