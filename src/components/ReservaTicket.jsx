@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import '../css/global.css'; // un CSS específico para el ticket
+import '../css/global.css';
 
 const ReservaTicket = ({ reserva }) => {
     const componentRef = useRef();

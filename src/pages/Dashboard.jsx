@@ -6,10 +6,9 @@ import '../css/Dashboard.css';
 
 const Dashboard = () => {
     const { user, logout, isAdmin } = useContext(AuthContext);
-    const { reservas, rooms } = useContext(RoomContext);
+    const { reservas, rooms, liberarHabitacion } = useContext(RoomContext);
     const navigate = useNavigate();
 
-    // Se filtran las reservas: si es Pasajero, solo ve las suyas (por DNI)
     const misReservas = isAdmin 
         ? reservas 
         : reservas.filter(res => res.pasajero.dni === user.dni);
@@ -23,7 +22,6 @@ const Dashboard = () => {
             </header>
 
             <div className="dashboard-content">
-                {/* Seccion de perfil (Datos relevantes) */}
                 <section className="info-card">
                     <h3>Mis Datos</h3>
                     <p><strong>DNI:</strong> {user.dni}</p>
@@ -31,7 +29,6 @@ const Dashboard = () => {
                     <p><strong>Email:</strong> {user.email}</p>
                 </section>
 
-                {/* Vista para administrar: estadísticas rápidas */}
                 {isAdmin && (
                     <section className="admin-stats">
                         <div className="stat-box">
@@ -42,10 +39,14 @@ const Dashboard = () => {
                             <h4>Reservas Globales</h4>
                             <p>{reservas.length}</p>
                         </div>
+                        {/* Botón para crear nueva habitación */}
+                        <div className="stat-box action-card" onClick={() => navigate('/nueva-habitacion')} style={{cursor: 'pointer', border: '2px dashed #3b82f6'}}>
+                            <h4>+ Crear Nueva</h4>
+                            <p>Habitación</p>
+                        </div>
                     </section>
                 )}
 
-                {/* Seccion de reservas */}
                 <section className="reservas-section">
                     <h3>{isAdmin ? 'Todas las Reservas del Hotel' : 'Mis Reservas Actuales'}</h3>
                     
@@ -58,6 +59,7 @@ const Dashboard = () => {
                                     <th>Fecha</th>
                                     <th>Días</th>
                                     <th>Total</th>
+                                    {isAdmin && <th>Acciones</th>}
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,6 +70,20 @@ const Dashboard = () => {
                                         <td>{res.fechaReserva}</td>
                                         <td>{res.cantDias}</td>
                                         <td>${res.costoTotal}</td>
+                                        {isAdmin && (
+                                            <td>
+                                                <button 
+                                                    className="btn-danger-small"
+                                                    onClick={() => {
+                                                        if(window.confirm('¿Desea finalizar esta reserva?')) {
+                                                            liberarHabitacion(res.habitacion.codigo);
+                                                        }
+                                                    }}
+                                                >
+                                                    Liberar
+                                                </button>
+                                            </td>
+                                        )}
                                     </tr>
                                 ))}
                             </tbody>
@@ -75,7 +91,6 @@ const Dashboard = () => {
                     ):(
                         <p className="no-data">No hay reservas registradas.</p>)}
 
-                    {/* Botón de acción para el Pasajero */}
                     {!isAdmin && (
                         <button 
                             className="btn-primary action-btn" 

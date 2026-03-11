@@ -1,0 +1,55 @@
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 2rem;
+}
+
+.room-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.room-card:hover { transform: scale(1.02); }
+
+.room-card.disabled {
+  opacity: 0.7;
+  filter: grayscale(1);
+}
+
+.room-header {
+  background: #f1f5f9;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.status.disponible { background: #dcfce7; color: #166534; }
+.status.ocupada { background: #fee2e2; color: #991b1b; }
+
+.room-body { padding: 1.5rem; }
+.price { font-size: 1.25rem; color: var(--primary); margin: 10px 0; }
+
+.reserva-controls {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reserva-controls input {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+}

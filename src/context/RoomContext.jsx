@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 export const RoomContext = createContext();
 
 export const RoomProvider = ({ children }) => {
-    // Estado de Habitaciones (Cargamos unas por defecto para que no esté vacío)
+    // Estado de Habitaciones (Cargue unas por defecto para que no esté vacío)
     const [rooms, setRooms] = useState(() => {
         const savedRooms = localStorage.getItem('rooms');
         return savedRooms ? JSON.parse(savedRooms) : [
@@ -54,6 +54,25 @@ export const RoomProvider = ({ children }) => {
 
         return nuevaReserva; // Se retorna para poder mostrar el ticket
     };
+
+const liberarHabitacion = (codigoHabitacion) => {
+    // Pone la habitación como disponible
+    const nuevasHabitaciones = rooms.map(r => 
+        r.codigo === codigoHabitacion ? { ...r, estado: 'Disponible' } : r
+    );
+    setRooms(nuevasHabitaciones);
+
+    // Es opcional: puede filtrar las reservas para eliminar la que correspondía a esa habitación
+    const nuevasReservas = reservas.filter(res => res.habitacion.codigo !== codigoHabitacion);
+    setReservas(nuevasReservas);
+};
+
+// liberar habitacion
+return (
+    <RoomContext.Provider value={{ rooms, reservas, crearReserva, liberarHabitacion, setRooms }}>
+        {children}
+    </RoomContext.Provider>
+);
 
     return (
         <RoomContext.Provider value={{ 

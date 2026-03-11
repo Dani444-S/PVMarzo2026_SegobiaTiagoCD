@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-// Creamos el contexto para que esté disponible en toda la App
+// Crea el contexto para que esté disponible en toda la App
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -21,39 +21,37 @@ export const AuthProvider = ({ children }) => {
 
     // Función para loguear al usuario (Pasajero o Admin)
     const register = (userData) => {
-        //Obtenemos los usuarios ya registrados para no pisarlos
-        const users = JSON.parse(localStorage.getItem("users")) || [];
+    //se usa 'users-db' para dllogin
+    const users = JSON.parse(localStorage.getItem("users-db")) || [];
 
-        //Verificamos si el DNI ya existe para evitar duplicados
-        const exist = users.find(u => u.dni === userData.dni);
-        if (exist) 
-            return { success: false, message: "El DNI ya está registrado." };
+    const exist = users.find(u => u.dni === userData.dni);
+    if (exist) 
+        return { success: false, msg: "El DNI ya está registrado." };
 
-        users.push(userData);
-        localStorage.setItem("users", JSON.stringify(users));
-        return { success: true, message: "Registro exitoso." };
-      };
+    users.push(userData);
+    localStorage.setItem("users-db", JSON.stringify(users)); // CAMBIO: 'users-db'
+    return { success: true, msg: "Registro exitoso." };
+};
 
-    // Función para loguear al usuario
-    const login = (email, password) => {
-        const users = JSON.parse(localStorage.getItem('users-db') || '[]');
-        
-        // Se busca coincidencia de credenciales
-        const validUser = users.find(u => u.email === email && u.password === password);
 
-        if (validUser) {
-            setUser(validUser); // Actualiza el estado global
-            return true;
-        }
-        return false;
-    };
+const login = (email, password) => {
 
+    const users = JSON.parse(localStorage.getItem('users-db') || '[]');
+    
+    const validUser = users.find(u => u.email === email && u.password === password);
+
+    if (validUser) {
+        setUser(validUser);
+        return true;
+    }
+    return false;
+};
     // Función para cerrar sesión
     const logout = () => {
         setUser(null);
     };
 
-    // Retornamos el Proveedor con los datos y funciones que los componentes necesitan
+    // Retorna el Proveedor con los datos y funciones que los componentes necesitan
     return (
         <AuthContext.Provider value={{ 
             user, 
