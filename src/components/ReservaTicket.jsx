@@ -53,7 +53,7 @@ const ReservaTicket = ({ reserva }) => {
                 </footer>
             </div>
 
-            {/* Botón de impresión (fuera del área de impresión) */}
+            {/* Botón de impresión*/}
             <button onClick={handlePrint} className="btn-primary print-btn">
                 Descargar Comprobante (PDF)
             </button>

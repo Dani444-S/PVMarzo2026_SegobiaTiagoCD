@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
         return { success: false, msg: "El DNI ya está registrado." };
 
     users.push(userData);
-    localStorage.setItem("users-db", JSON.stringify(users)); // CAMBIO: 'users-db'
+    localStorage.setItem("users-db", JSON.stringify(users));
     return { success: true, msg: "Registro exitoso." };
 };
 

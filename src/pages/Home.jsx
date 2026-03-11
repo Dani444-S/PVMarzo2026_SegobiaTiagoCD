@@ -33,7 +33,6 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* FOOTER Agregado */}
             <footer className="home-footer">
                 <p>&copy; 2026 Hotel APU - Facultad de Ingeniería UNJu</p>
                 <p>Analista Programador Universitario</p>

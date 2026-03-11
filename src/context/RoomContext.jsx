@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 export const RoomContext = createContext();
 
 export const RoomProvider = ({ children }) => {
-    // Estado de Habitaciones (Cargue unas por defecto para que no esté vacío)
+    // Estado de Habitaciones
     const [rooms, setRooms] = useState(() => {
         const savedRooms = localStorage.getItem('rooms');
         return savedRooms ? JSON.parse(savedRooms) : [
@@ -35,7 +35,7 @@ export const RoomProvider = ({ children }) => {
         const costoTotal = cantDias * habitacion.costo;
 
         const nuevaReserva = {
-            codigo: `RES-${Date.now()}`, // Código único basado en tiempo
+            codigo: `RES-${Date.now()}`, // Código basado en tiempo
             fechaReserva: new Date().toLocaleDateString(),
             pasajero,
             habitacion,
