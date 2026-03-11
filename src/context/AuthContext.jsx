@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
     // Función para loguear al usuario (Pasajero o Admin)
     const register = (userData) => {
-    //se usa 'users-db' para dllogin
+    //se usa 'users-db' para login
     const users = JSON.parse(localStorage.getItem("users-db")) || [];
 
     const exist = users.find(u => u.dni === userData.dni);
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
         return { success: false, msg: "El DNI ya está registrado." };
 
     users.push(userData);
-    localStorage.setItem("users-db", JSON.stringify(users)); // CAMBIO: 'users-db'
+    localStorage.setItem("users-db", JSON.stringify(users));
     return { success: true, msg: "Registro exitoso." };
 };
 
