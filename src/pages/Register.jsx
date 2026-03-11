@@ -40,7 +40,7 @@ const Register = () => {
 
     return (
         <div className="auth-page">
-            <div className="auth-card" style={{maxWidth: '500px'}}> {/* Card un poco más ancha */}
+            <div className="auth-card" style={{maxWidth: '500px'}}> 
                 <h2>Registro de Usuario</h2>
                 <p>Crea tu cuenta para gestionar tus reservas.</p>
 
@@ -55,7 +55,7 @@ const Register = () => {
                             placeholder="Ej: 40123456" 
                             value={dni} 
                             onChange={(e) => {
-                                // Esta lógica extra impide que escriban letras mientras teclean
+                                // impide que escriban letras mientras teclean
                                 const val = e.target.value.replace(/\D/g, ""); // Solo deja números
                                 onInputChange({ target: { name: 'dni', value: val } });
                             }}
