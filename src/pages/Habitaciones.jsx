@@ -23,7 +23,7 @@ const Habitaciones = () => {
         
         if (reservaRealizada) {
             alert("¡Reserva realizada con éxito!");
-            navigate('/dashboard'); // Opcionalmente, puedes navegar a una página de 'Ticket'
+            navigate('/dashboard'); // Opcionalmente, puede navegar a una página de 'Ticket'
         }
     };
 

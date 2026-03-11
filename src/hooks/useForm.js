@@ -10,7 +10,7 @@ export const useForm = (initialForm = {}) => {
     const onInputChange = ({ target }) => {
         const { name, value } = target;
         
-        // Actualizamos solo el campo que cambió usando el atributo 'name'
+        // Actualiza solo el campo que cambió usando el atributo 'name'
         setFormState({
             ...formState,
             [name]: value
@@ -22,7 +22,7 @@ export const useForm = (initialForm = {}) => {
         setFormState(initialForm);
     };
 
-    // Retornamos el estado y las funciones para que las use el componente
+    // Retorna el estado y las funciones para que las use el componente
     return {
         ...formState,     // Desestructura para acceder directo a los campos
         formState,        // El objeto completo, si se llega a necesitar
