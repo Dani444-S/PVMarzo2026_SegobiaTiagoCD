@@ -17,7 +17,6 @@ const NuevaHabitacion = () => {
     const handleCreate = (e) => {
         e.preventDefault();
         
-        // Validación de código duplicado
         if (rooms.find(r => r.codigo === form.codigo)) {
             return alert("El código de habitación ya existe.");
         }

@@ -15,7 +15,6 @@ const ReservaTicket = ({ reserva }) => {
 
     return (
         <div className="ticket-wrapper">
-            {/* Area que se imprimira */}
             <div ref={componentRef} className="ticket-container">
                 <div className="ticket-header">
                     <h2>Comprobante de Reserva</h2>
@@ -53,7 +52,6 @@ const ReservaTicket = ({ reserva }) => {
                 </footer>
             </div>
 
-            {/* Botón de impresión*/}
             <button onClick={handlePrint} className="btn-primary print-btn">
                 Descargar Comprobante (PDF)
             </button>

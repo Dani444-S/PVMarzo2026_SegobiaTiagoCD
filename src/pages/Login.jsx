@@ -31,8 +31,8 @@ const Login = () => {
     };
 
     return (
-        <div className="auth-page"> {/* Contenedor para centrar */}
-            <div className="auth-card"> {/* Tarjeta con estilo */}
+        <div className="auth-page">
+            <div className="auth-card">
                 <h2>¡Bienvenido!</h2>
                 <p>Ingresa tus datos para acceder al sistema.</p>
 

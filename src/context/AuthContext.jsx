@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
     // Función para loguear al usuario (Pasajero o Admin)
     const register = (userData) => {
-    //se usa 'users-db' para dllogin
+    //se usa 'users-db' para login
     const users = JSON.parse(localStorage.getItem("users-db")) || [];
 
     const exist = users.find(u => u.dni === userData.dni);

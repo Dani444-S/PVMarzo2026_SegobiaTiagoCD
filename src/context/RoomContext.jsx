@@ -35,7 +35,7 @@ export const RoomProvider = ({ children }) => {
         const costoTotal = cantDias * habitacion.costo;
 
         const nuevaReserva = {
-            codigo: `RES-${Date.now()}`, // Código basado en tiempo
+            codigo: `RES-${Date.now()}`,
             fechaReserva: new Date().toLocaleDateString(),
             pasajero,
             habitacion,
