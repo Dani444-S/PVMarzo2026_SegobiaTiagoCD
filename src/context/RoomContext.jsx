@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 export const RoomContext = createContext();
 
 export const RoomProvider = ({ children }) => {
-    // Estado de Habitaciones (Cargue unas por defecto para que no esté vacío)
+    // Estado de Habitaciones
     const [rooms, setRooms] = useState(() => {
         const savedRooms = localStorage.getItem('rooms');
         return savedRooms ? JSON.parse(savedRooms) : [
@@ -20,7 +20,7 @@ export const RoomProvider = ({ children }) => {
         return savedReservas ? JSON.parse(savedReservas) : [];
     });
 
-    // Guardar en LocalStorage cada vez que cambien los datos
+    // Guarda en LocalStorage cada vez que cambien los datos
     useEffect(() => {
         localStorage.setItem('rooms', JSON.stringify(rooms));
     }, [rooms]);
